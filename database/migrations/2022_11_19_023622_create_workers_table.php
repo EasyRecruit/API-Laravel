@@ -13,18 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('workers', function (Blueprint $table) {
             $table->id();
-            $table->uuid();
-            $table->foreignId('authenticatable_id')->constrained()->cascadeOnDelete();
-            $table->string('authenticatable_type');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('other_names');
-            $table->string('mobile_number')->unique();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('job_title');
+            $table->json('skills');
 
             $table->boolean('is_active')->default(true);
             $table->foreignId('added_by_id')->nullable();
@@ -41,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('workers');
     }
 };
