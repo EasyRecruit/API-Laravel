@@ -14,6 +14,14 @@ class Worker extends Model implements HasMedia
     use HasFactory, SoftDeletes, InteractsWithMedia, GeneraModelTrait;
 
 
+    protected static function bootGeneraModelTrait()
+    {
+        parent::boot();
+        static::deleting(function ($model) {
+//            $model->clearMediaCollection('cv');
+        });
+    }
+
     protected $guarded = [
         'created_at',
         'update_at',
