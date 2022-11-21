@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\GeneraModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
-    use HasFactory;
+    use HasFactory, GeneraModelTrait;
 
 
     protected $guarded = [
@@ -17,7 +18,7 @@ class Company extends Model
     ];
 
 
-    public function userAccount(){
+    public function authAccount(){
         return $this->morphOne(User::class, 'authenticatable');
     }
 }

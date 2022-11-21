@@ -15,7 +15,13 @@ return new class extends Migration
     {
         Schema::create('workers', function (Blueprint $table) {
             $table->id();
-            $table->string('job_title');
+            $table->uuid();
+
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('other_names')->nullable();
+            $table->string('position');
+            $table->string('qualification');
             $table->json('skills');
 
             $table->boolean('is_active')->default(true);

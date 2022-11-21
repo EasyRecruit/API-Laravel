@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\GeneraModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Administrator extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, GeneraModelTrait;
 
 
     protected $guarded = [
@@ -18,7 +19,7 @@ class Administrator extends Model
     ];
 
 
-    public function userAccount(){
+    public function authAccount(){
         return $this->morphOne(User::class, 'authenticatable');
     }
 }

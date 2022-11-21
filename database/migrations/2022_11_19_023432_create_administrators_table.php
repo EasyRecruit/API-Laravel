@@ -15,8 +15,21 @@ return new class extends Migration
     {
         Schema::create('administrators', function (Blueprint $table) {
             $table->id();
+            $table->uuid();
+
+            $table->string('position');
+
+            $table->boolean('is_active')->default(true);
+            $table->foreignId('added_by_id')->nullable();
+            $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
+
+        // Create admin for testing
+        App\Models\Administrator::create([
+            'position' => 'HR'
+        ]);
     }
 
     /**
