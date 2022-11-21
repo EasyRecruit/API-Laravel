@@ -5,7 +5,6 @@ namespace App\Http\Controllers\V1;
 use App\Http\Controllers\APIBaseController;
 use App\Http\Requests\V1\Worker\StoreRequest;
 use App\Http\Requests\V1\Worker\UpdateRequest;
-use App\Http\Resources\V1\WorkerResource;
 use App\Models\Worker;
 use App\Services\WorkerService;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,15 +35,14 @@ class WorkerController extends APIBaseController
 
     public function show(Worker $worker)
     {
-        $response['worker'] = new WorkerResource($worker);
+        $response['worker'] = $this->service->show($worker);
         return $this->successResponse("worker found", $response);
     }
 
 
     public function update(UpdateRequest $request, Worker $worker)
     {
-        $worker = $this->service->update($worker, $request);
-        $response['worker'] = new WorkerResource($worker);
+        $response['worker'] = $this->service->update($worker, $request);
         return $this->successResponse("worker updated successfully", $response);
     }
 

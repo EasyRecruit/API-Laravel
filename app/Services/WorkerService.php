@@ -35,11 +35,15 @@ class WorkerService
             // store certificates (pdf)
             (new MediaService())->storePdf($worker, $validatedRequest['cv']);
             DB::commit();
-            return $worker;
+            return new WorkerResource($worker);
         } catch (\Exception $exception){
             DB::rollBack();
             throw new \Exception("An error occurred, worker could not be created");
         }
+    }
+
+    public function show(Worker $worker){
+        return new WorkerResource($worker);
     }
 
     public function update(Worker $worker, UpdateRequest $request){
@@ -56,7 +60,7 @@ class WorkerService
             $worker->clearMediaCollection('cv');
             (new MediaService())->storePdf($worker, $validatedRequest['cv']);
         }
-        return $worker;
+        return new WorkerResource($worker);
     }
 
     public function delete(Worker $worker){
