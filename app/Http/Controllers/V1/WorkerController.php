@@ -43,7 +43,9 @@ class WorkerController extends APIBaseController
 
     public function update(UpdateRequest $request, Worker $worker)
     {
-        //
+        $worker = $this->service->update($worker, $request);
+        $response['worker'] = new WorkerResource($worker);
+        return $this->successResponse("worker updated successfully", $response);
     }
 
 
