@@ -28,6 +28,8 @@ class StoreRequest extends FormRequest
             'first_name' => ['required', 'string', new NameRule(), 'max:255', 'min:3'],
             'last_name' => ['required', 'string', new NameRule()],
             'other_names' => ['nullable', 'string', new NameRule()],
+            'email' => ['required', 'string', 'email', 'unique:workers'],
+            'mobile_number' => ['required', 'string', 'unique:workers'],
             'position' => ['required', 'string'],
             'qualification' => ['required', 'string'],
             'skills' => ['required', 'array'],

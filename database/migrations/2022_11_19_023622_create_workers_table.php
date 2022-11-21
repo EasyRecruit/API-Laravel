@@ -19,10 +19,15 @@ return new class extends Migration
 
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('email');
+            $table->string('mobile_number');
             $table->string('other_names')->nullable();
             $table->string('position');
             $table->string('qualification');
             $table->json('skills');
+
+            $table->boolean('is_employed')->default(false);
+            $table->foreignId('company_id')->nullable();
 
             $table->boolean('is_active')->default(true);
             $table->foreignId('added_by_id')->nullable();

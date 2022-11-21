@@ -4,6 +4,7 @@ namespace App\Http\Requests\V1\Worker;
 
 use App\Rules\NameRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
 {
@@ -28,6 +29,13 @@ class UpdateRequest extends FormRequest
             'first_name' => ['required', 'string', new NameRule(), 'max:255', 'min:3'],
             'last_name' => ['required', 'string', new NameRule()],
             'other_names' => ['nullable', 'string', new NameRule()],
+
+            'email' => ['required', 'string', 'email', Rule::unique('workers')
+                ->ignore($this->worker)->whereNull('deleted_at')],
+
+            'mobile_number' => ['required', 'string', Rule::unique('workers')
+                ->ignore($this->worker)->whereNull('deleted_at')],
+
             'position' => ['required', 'string'],
             'qualification' => ['required', 'string'],
             'skills' => ['required', 'array'],
