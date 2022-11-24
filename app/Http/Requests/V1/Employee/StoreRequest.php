@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\V1\Worker;
+namespace App\Http\Requests\V1\Employee;
 
 use App\Rules\NameRule;
 use Illuminate\Foundation\Http\FormRequest;

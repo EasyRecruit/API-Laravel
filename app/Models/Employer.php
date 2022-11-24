@@ -6,7 +6,7 @@ use App\Traits\GeneraModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model
+class Employer extends Model
 {
     use HasFactory, GeneraModelTrait;
 

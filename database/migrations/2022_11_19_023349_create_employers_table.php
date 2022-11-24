@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('employers', function (Blueprint $table) {
             $table->id();
             $table->uuid();
 

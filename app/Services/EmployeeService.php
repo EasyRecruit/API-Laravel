@@ -4,17 +4,17 @@
 namespace App\Services;
 
 
-use App\Http\Requests\V1\Worker\StoreRequest;
-use App\Http\Requests\V1\Worker\UpdateRequest;
-use App\Http\Resources\V1\WorkerResource;
-use App\Models\Worker;
+use App\Http\Requests\V1\Employee\StoreRequest;
+use App\Http\Requests\V1\Employee\UpdateRequest;
+use App\Http\Resources\V1\EmployeeResource;
+use App\Models\Employee;
 use Illuminate\Support\Facades\DB;
 
-class WorkerService
+class EmployeeService
 {
     public function all(){
-        $workers = WorkerResource::collection(Worker::all());
-        return $workers;
+        $employee = EmployeeResource::collection(Employee::all());
+        return $employee;
     }
 
     public function store(StoreRequest $request){
@@ -23,7 +23,7 @@ class WorkerService
             DB::beginTransaction();
 
             // create worker
-            $worker = Worker::create([
+            $employee = Employee::create([
                 'first_name' => $validatedRequest['first_name'],
                 'last_name' => $validatedRequest['last_name'],
                 'other_names' => $validatedRequest['other_names'] ?? null,
@@ -33,22 +33,22 @@ class WorkerService
             ]);
 
             // store certificates (pdf)
-            (new MediaService())->storePdf($worker, $validatedRequest['cv']);
+            (new MediaService())->storePdf($employee, $validatedRequest['cv']);
             DB::commit();
-            return new WorkerResource($worker);
+            return new EmployeeResource($employee);
         } catch (\Exception $exception){
             DB::rollBack();
-            throw new \Exception("An error occurred, worker could not be created");
+            throw new \Exception("An error occurred, employee could not be created");
         }
     }
 
-    public function show(Worker $worker){
-        return new WorkerResource($worker);
+    public function show(Employee $worker){
+        return new EmployeeResource($worker);
     }
 
-    public function update(Worker $worker, UpdateRequest $request){
+    public function update(Employee $employee, UpdateRequest $request){
         $validatedRequest = $request->validated();
-        $worker->update([
+        $employee->update([
             'first_name' => $validatedRequest['first_name'],
             'last_name' => $validatedRequest['last_name'],
             'other_names' => $validatedRequest['other_names'] ?? null,
@@ -57,17 +57,17 @@ class WorkerService
             'skills' => json_encode($validatedRequest['skills']),
         ]);
         if (isset($validatedRequest['cv'])){
-            $worker->clearMediaCollection('cv');
-            (new MediaService())->storePdf($worker, $validatedRequest['cv']);
+            $employee->clearMediaCollection('cv');
+            (new MediaService())->storePdf($employee, $validatedRequest['cv']);
         }
-        return new WorkerResource($worker);
+        return new EmployeeResource($employee);
     }
 
-    public function delete(Worker $worker){
+    public function delete(Employee $employee){
         try {
-            $worker->delete();
+            $employee->delete();
         } catch (\Exception $exception){
-            throw new \Exception("An error occurred, worker could not be deleted");
+            throw new \Exception("An error occurred, employee could not be deleted");
         }
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\V1\WorkerController;
+use App\Http\Controllers\V1\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::controller(WorkerController::class)
+Route::controller(EmployeeController::class)
     ->middleware(['auth:sanctum', 'active'])
     ->prefix('workers')
     ->group(function (){

@@ -34,7 +34,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $morph_types = [
         'admin' => 'App\Models\Administrator',
-        'company' => 'App\Models\Company'
+        'company' => 'App\Models\Employer'
     ];
 
     public function authenticatable(){
