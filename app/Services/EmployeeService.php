@@ -24,12 +24,11 @@ class EmployeeService
 
             // create worker
             $employee = Employee::create([
+                'department_id' => $validatedRequest['department'] ?? null,
                 'first_name' => $validatedRequest['first_name'],
                 'last_name' => $validatedRequest['last_name'],
                 'other_names' => $validatedRequest['other_names'] ?? null,
-                'position' => $validatedRequest['position'],
-                'qualification' => $validatedRequest['qualification'],
-                'skills' => json_encode($validatedRequest['skills']),
+                'role' => $validatedRequest['role'],
             ]);
 
             // store certificates (pdf)

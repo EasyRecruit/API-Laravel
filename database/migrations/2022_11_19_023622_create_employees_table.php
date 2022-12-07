@@ -20,9 +20,9 @@ return new class extends Migration
             $table->foreignId('department_id');
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('other_names')->nullable();
             $table->string('email');
             $table->string('mobile_number');
-            $table->string('other_names')->nullable();
             $table->string('role');
 
             $table->boolean('is_employed')->default(false);

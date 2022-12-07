@@ -19,10 +19,9 @@ class EmployeeResource extends JsonResource
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'other_names' => $this->other_names,
-            'position' => $this->position,
-            'qualification' => $this->qualification,
-            'skills' => $this->skills,
-            'cv' => $this->getMedia('cv')[0]->getUrl(),
+            'role' => $this->role,
+            'is_employed' => $this->is_employed,
+            'company_id' => $this->company_id,
         ];
     }
 }
