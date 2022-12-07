@@ -13,20 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('employees', function (Blueprint $table) {
+        Schema::create('education', function (Blueprint $table) {
             $table->id();
             $table->uuid();
 
-            $table->foreignId('department_id');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email');
-            $table->string('mobile_number');
-            $table->string('other_names')->nullable();
-            $table->string('role');
-
-            $table->boolean('is_employed')->default(false);
-            $table->foreignId('company_id')->nullable();
+            $table->foreignId('employee_id');
+            $table->string('school');
+            $table->string('program');
+            $table->text('note')->nullable();
+            $table->string('position')->nullable();
+            $table->date('start_date');
+            $table->date('end_date')->nullable();
+            $table->boolean('has_completed');
 
             $table->boolean('is_active')->default(true);
             $table->foreignId('added_by_id')->nullable();
@@ -43,6 +41,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('workers');
+        Schema::dropIfExists('education');
     }
 };
